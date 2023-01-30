@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import datetime
 
 # import the necessary packages
 from imutils.video import VideoStream
@@ -7,6 +8,7 @@ import face_recognition
 import pickle
 import time
 import cv2
+
 
 # Initialize 'currentname' to trigger only when a new person is identified.
 currentname = "unknown"
@@ -24,11 +26,11 @@ time.sleep(2.0)
 
 # Start the FPS counter.
 fps = FPS().start()
+dateFormat = '%Y-%m-%d %H:%M:%S'
 
 # Start the video stream.
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('video.avi', fourcc, 2.0, (320, 240))
-
+out = cv2.VideoWriter('video-'+datetime.today().strftime(dateFormat)+'.avi', fourcc, 2.0, (320, 240))
 # Loop over frames from the video file stream.
 while True:
     # Grab the frame from the threaded video stream.
@@ -66,10 +68,10 @@ while True:
             # Print name on screen if someone is identified.
             if currentname != name:
                 currentname = name
-                print(currentname)
+                print(currentname+"-"+datetime.today().strftime(dateFormat))
 
                 # TODO: If you'd like to react to something here, do it.
-                # cv2.imwrite("filename.jpg", frame)
+                cv2.imwrite(currentname+"-"+datetime.today().strftime(dateFormat)+".jpg", frame)
                 # do_something(name)
 
         # Update the list of names.
