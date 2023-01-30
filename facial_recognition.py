@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import datetime
+from datetime import datetime
 
 # import the necessary packages
 from imutils.video import VideoStream
@@ -71,7 +71,8 @@ while True:
                 print(currentname+"-"+datetime.today().strftime(dateFormat))
 
                 # TODO: If you'd like to react to something here, do it.
-                cv2.imwrite(currentname+"-"+datetime.today().strftime(dateFormat)+".jpg", frame)
+                # This only recognizes once
+                # cv2.imwrite(currentname+"-"+datetime.today().strftime(dateFormat)+".jpg", frame)
                 # do_something(name)
 
         # Update the list of names.
@@ -84,18 +85,21 @@ while True:
         y = top - 15 if top - 15 > 15 else top + 15
         cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
                     .8, (0, 255, 255), 2)
+        # This recognizes all the time very frequently this detection can be outputted somewhere else
+        # print(name + "-" + datetime.today().strftime(dateFormat))
+
 
     # Write frame to stream.
     out.write(frame)
 
     # Display the image to our screen.
-    cv2.imshow("Facial Recognition is Running", frame)
-    key = cv2.waitKey(1) & 0xFF
+    # cv2.imshow("Facial Recognition is Running", frame)
+    # key = cv2.waitKey(1) & 0xFF
 
     # Quit when 'q' key is pressed.
-    if key == ord("q"):
-        break
-
+    # if key == ord("q"):
+    #     break
+    print("loop done "+datetime.today().strftime(dateFormat))
     # Update FPS counter.
     fps.update()
 
